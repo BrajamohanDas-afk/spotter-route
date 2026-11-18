@@ -32,6 +32,11 @@ ALLOWED_HOSTS = [
     if host.strip()
 ]
 
+# Render sets RENDER_EXTERNAL_HOSTNAME for the public service hostname.
+render_hostname = os.environ.get("RENDER_EXTERNAL_HOSTNAME", "").strip()
+if render_hostname and render_hostname not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.append(render_hostname)
+
 
 # Installed applications
 
