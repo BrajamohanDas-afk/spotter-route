@@ -1,0 +1,194 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Instrument-panel palette: monochrome chrome, colour reserved for data. */
+    --background: 205 38% 4%;
+    --foreground: 195 26% 93%;
+    --card: 204 32% 6%;
+    --card-foreground: 195 26% 93%;
+    --popover: 202 30% 7%;
+    --popover-foreground: 195 26% 93%;
+    --primary: 192 32% 95%;
+    --primary-foreground: 200 60% 5%;
+    --secondary: 202 26% 10%;
+    --secondary-foreground: 195 20% 88%;
+    --muted: 202 24% 11%;
+    --muted-foreground: 197 14% 58%;
+    --accent: 200 24% 13%;
+    --accent-foreground: 195 26% 93%;
+    --destructive: 3 100% 67%;
+    --destructive-foreground: 0 60% 6%;
+    --border: 201 30% 12%;
+    --input: 200 26% 18%;
+    --ring: 192 32% 82%;
+    --radius: 0.375rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "cv05" 1, "ss01" 1;
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.22);
+  }
+
+  /* Terminal scrollbars */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--input)) transparent;
+  }
+
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: hsl(var(--input));
+    border-radius: 999px;
+  }
+}
+
+@layer components {
+  .micro-label {
+    @apply font-mono text-[10px] uppercase tracking-label text-muted-foreground;
+  }
+
+  .rule-grid {
+    background-image:
+      linear-gradient(hsl(var(--border) / 0.55) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--border) / 0.55) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(circle at 50% 40%, black 0%, transparent 72%);
+  }
+
+  .panel-hatch {
+    background-image: repeating-linear-gradient(
+      135deg,
+      hsl(var(--border) / 0.5) 0px,
+      hsl(var(--border) / 0.5) 1px,
+      transparent 1px,
+      transparent 6px
+    );
+  }
+}
+
+/* ---------- MapLibre skin ---------- */
+
+.maplibregl-map {
+  font-family: inherit;
+}
+
+.maplibregl-ctrl-group {
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: 4px;
+  box-shadow: none;
+  overflow: hidden;
+}
+
+.maplibregl-ctrl-group button + button {
+  border-top: 1px solid hsl(var(--border));
+}
+
+.maplibregl-ctrl-group button .maplibregl-ctrl-icon {
+  filter: invert(1) opacity(0.72);
+}
+
+.maplibregl-ctrl-attrib {
+  background: hsl(var(--background) / 0.82) !important;
+  border-radius: 3px;
+  color: hsl(var(--muted-foreground)) !important;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 9px;
+}
+
+.maplibregl-ctrl-attrib a {
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+.maplibregl-ctrl-bottom-right {
+  bottom: 132px;
+}
+
+.maplibregl-popup-content {
+  background: hsl(var(--popover));
+  border: 1px solid hsl(var(--border));
+  border-radius: 6px;
+  box-shadow: 0 22px 48px rgb(0 0 0 / 0.55);
+  color: hsl(var(--foreground));
+  font-size: 11px;
+  line-height: 1.5;
+  padding: 10px 12px;
+}
+
+.maplibregl-popup-tip {
+  border-bottom-color: hsl(var(--popover)) !important;
+  border-top-color: hsl(var(--popover)) !important;
+}
+
+.maplibregl-popup-close-button {
+  color: hsl(var(--muted-foreground));
+  font-size: 15px;
+  padding: 2px 6px;
+}
+
+/* Popup body (HTML string built in the map component) */
+.popup__title {
+  align-items: baseline;
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  margin-bottom: 7px;
+  padding-right: 14px;
+}
+
+.popup__title strong {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+}
+
+.popup__risk {
+  color: var(--level-color);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.popup__row {
+  color: hsl(var(--muted-foreground));
+  display: flex;
+  font-size: 10.5px;
+  gap: 10px;
+  justify-content: space-between;
+  min-width: 176px;
+}
+
+.popup__row b {
+  color: hsl(var(--foreground));
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-weight: 500;
+}
+
+.popup__foot {
+  border-top: 1px solid hsl(var(--border));
+  color: hsl(var(--muted-foreground));
+  font-size: 9.5px;
+  margin-top: 7px;
+  padding-top: 6px;
+}
